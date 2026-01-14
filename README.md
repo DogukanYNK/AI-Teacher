@@ -98,7 +98,7 @@ Tüm veriler tarayıcıda localStorage'da saklanıyor:
 - ✅ **Artı**: Hızlı, offline çalışır, kurulum gerektirmez
 - ⚠️ **Eksi**: Tarayıcı temizlenirse silinir, cihazlar arası senkron yok
 
-## 🔄 API Entegrasyonu
+## 🔄 API Entegrasyonu (Yapılıcaklar...)
 
 ### Backend'e Geçiş İçin
 1. **API_GUIDE.md** dosyasını oku ⭐
@@ -114,8 +114,6 @@ Tüm veriler tarayıcıda localStorage'da saklanıyor:
 - `/api/speech/*` - TTS/STT (opsiyonel)
 
 ## 🎯 Sonraki Adımlar
-
-### Hemen Yapılabilir
 - [ ] Gerçek AI entegrasyonu (OpenAI API)
 - [ ] Backend API kurulumu
 - [ ] Database (PostgreSQL/Supabase)
