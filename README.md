@@ -1,36 +1,156 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# KonuşTürk - AI Dil Öğrenme Platformu 🎓🎤
 
-## Getting Started
+Modern, konuşma odaklı AI destekli dil öğrenme web uygulaması.
 
-First, run the development server:
+## ✨ Yeni Özellikler
 
+### 🔐 Kullanıcı Yönetimi (localStorage)
+- ✅ Gerçek kayıt sistemi - email + şifre
+- ✅ Giriş yapma sistemi
+- ✅ Kullanıcı bilgilerini kaydet (ad, soyad, seviye)
+- ✅ Çıkış yapma
+
+### 💾 Geçmiş Konuşmalar
+- ✅ Tüm konuşmalar kaydediliyor
+- ✅ Sidebar'dan geçmiş konuşmalara erişim
+- ✅ Konuşma silme özelliği
+- ✅ Otomatik başlık oluşturma (ilk mesajdan)
+
+### 🎤 Konuşma Odaklı UI
+- ✅ **Ana özellik**: Büyük mikrofon butonu (24x24 boyut)
+- ✅ Mikrofon animasyonu (kayıt sırasında kırmızı + pulse)
+- ✅ Konuşma tanıma (Web Speech API)
+- ✅ Text input ikincil seçenek (küçük, altta)
+- ✅ "Mikrofona bas ve konuş" rehberliği
+
+### 🔊 Ses Özellikleri
+- ✅ Her öğretmen için **örnek ses çalma** butonu (Play ikonu)
+- ✅ AI mesajlarında hoparlör butonu ile sesi dinle
+- ✅ Otomatik ses çalma (hoş geldin mesajı)
+- ✅ Text-to-Speech (Web Speech API, Türkçe)
+
+### 🎨 UI İyileştirmeleri
+- ✅ Konuşma odaklı tasarım
+- ✅ Büyük, merkezi mikrofon butonu
+- ✅ Wizard'da ses örnekleri dinleme
+- ✅ Geçmiş konuşmalar sidebar
+- ✅ Responsive mobile design
+
+## 🚀 Kullanım
+
+### Başlatma
 ```bash
+cd ai-language-learning
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Tarayıcıda: http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### İlk Kullanım
+1. Ana sayfadan "Ücretsiz Dene" tıkla
+2. Email + şifre ile kaydol
+3. Ad, soyad, seviye bilgilerini gir
+4. Wizard'ı tamamla:
+   - Dil seç
+   - Öğretmen seç (🔊 ses örneğini dinle!)
+   - Amaç seç
+   - Seviye belirle
+5. 🎤 Mikrofona bas ve konuşmaya başla!
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Konuşma Kullanımı
+- **Birincil**: 🎤 Mikrofon butonuna bas → Konuş → Otomatik gönderilir
+- **İkincil**: Alttaki text input'a yaz → Enter veya Send butonu
 
-## Learn More
+### Özellikler
+- 💬 Geçmiş konuşmalar: Sol üstteki menü (☰)
+- 🔊 AI mesajlarını dinle: Hoparlör ikonuna tıkla
+- 🗑️ Konuşma sil: Sidebar'da konuşmanın üzerine gel
+- 🚪 Çıkış yap: Sağ üstteki çıkış ikonu
 
-To learn more about Next.js, take a look at the following resources:
+## 📁 Dosya Yapısı
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+src/
+├── app/
+│   ├── page.tsx                # Ana sayfa (login/register)
+│   ├── onboarding/page.tsx     # Kullanıcı bilgileri
+│   └── chat/page.tsx           # Chat arayüzü ⭐
+├── lib/
+│   └── storage.ts              # localStorage servisi ⭐
+└── ...
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+API_GUIDE.md                    # Backend API rehberi ⭐
+```
 
-## Deploy on Vercel
+## 🔧 Teknik Detaylar
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### localStorage Yapısı
+- `konusturk_users`: Kullanıcı listesi
+- `konusturk_current_user`: Aktif kullanıcı
+- `konusturk_chat_sessions`: Tüm konuşmalar
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Web API'ler
+- **Speech Recognition**: Konuşma tanıma (webkitSpeechRecognition)
+- **Speech Synthesis**: Text-to-Speech (SpeechSynthesisUtterance)
+
+### Veriler
+Tüm veriler tarayıcıda localStorage'da saklanıyor:
+- ✅ **Artı**: Hızlı, offline çalışır, kurulum gerektirmez
+- ⚠️ **Eksi**: Tarayıcı temizlenirse silinir, cihazlar arası senkron yok
+
+## 🔄 API Entegrasyonu
+
+### Backend'e Geçiş İçin
+1. **API_GUIDE.md** dosyasını oku ⭐
+2. Backend API'yi kur (Node.js + PostgreSQL önerili)
+3. OpenAI/Gemini API'sini entegre et
+4. `src/lib/storage.ts` yerine `src/lib/api.ts` kullan
+5. Environment variables ayarla
+
+### Gerekli API'ler
+- `/api/auth/*` - Authentication
+- `/api/chat/sessions` - Konuşma yönetimi
+- `/api/ai/chat` - AI yanıtları (OpenAI/Gemini)
+- `/api/speech/*` - TTS/STT (opsiyonel)
+
+## 🎯 Sonraki Adımlar
+
+### Hemen Yapılabilir
+- [ ] Gerçek AI entegrasyonu (OpenAI API)
+- [ ] Backend API kurulumu
+- [ ] Database (PostgreSQL/Supabase)
+- [ ] Çeviri API'si
+- [ ] Daha kaliteli TTS (Azure)
+
+## 📊 Maliyet (Backend ile)
+
+### Başlangıç (~$70-250/ay)
+- Database + Auth: $0-25
+- OpenAI API: $60-150
+- Hosting: $0-20
+- Speech API (opsiyonel): $10-50
+
+### Ücretsiz Alternatifler
+- Web Speech API ✅ Şu anda kullanılıyor
+- Supabase Free tier
+- Vercel hosting
+
+## 🐛 Bilinen Sınırlamalar
+
+1. **localStorage**: Tarayıcı temizlenirse veriler silinir
+2. **Web Speech API**: Sadece Chrome/Edge'de çalışır
+3. **AI Simülasyonu**: Şu anda gerçek AI yok (demo yanıtlar)
+4. **Çeviri**: Hardcoded örnek çeviriler
+
+## 💡 İpuçları
+
+- Chrome veya Edge kullan (ses özelliği için)
+- Mikrofon izni ver
+- Sessiz ortamda konuş
+- localStorage'ı sakla
+
+---
+
+**Geliştirici**: GitHub Copilot + Doğukan
+**Tech Stack**: Next.js 14, TypeScript, Tailwind, Framer Motion
+**Versiyon**: 2.0.0
